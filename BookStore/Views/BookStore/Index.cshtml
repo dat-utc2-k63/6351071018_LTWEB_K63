@@ -1,0 +1,150 @@
+﻿@using BookStore.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<SACH>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div id="templatemo_content">
+
+    <div id="templatemo_content_left">
+        <div class="templatemo_content_left_section">
+            <h1>Tên chủ đề</h1>
+            @Html.Action("ChuDe", "BookStore")
+        </div>
+        <div class="templatemo_content_left_section">
+            <h1>Bestsellers</h1>
+            @Html.Action("Nhaxuatban", "BookStore")
+        </div>
+
+        <div class="templatemo_content_left_section">
+            <a href="http://validator.w3.org/check?uri=referer"><img style="border:0;width:88px;height:31px" src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" width="88" height="31" vspace="8" border="0" /></a>
+            <a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!" vspace="8" border="0" /></a>
+        </div>
+    </div>
+
+    <div id="templatemo_content_right" >
+        @foreach (var sach in Model)
+        {
+            <div class="templatemo_product_box">
+                <h1>Photography  <span>(by Best Author)</span></h1>
+                <a href="@Url.Action("Details", "BookStore", new { id = sach.Masach })">
+                    <img src="~/Content/images/@sach.Anhbia" alt="@sach.Tensach" />
+                </a>
+                <div class="product_info">
+                    <p>@sach.Mota</p>
+                    <h3>$@sach.Giaban</h3>
+                    <div class="buy_now_button"><a href="@Url.Action("ThemGioHang", "GioHang", new { @iMasach = sach.Masach, strURL = Request.Url.ToString() })">Buy Now</a></div>
+                    <div class="detail_button"><a href="@Url.Action("Details", "BookStore", new { id = sach.Masach })">Detail</a></div>
+                </div>
+                <div class="cleaner">&nbsp;</div>
+            </div>}
+
+    </div> <!-- end of content right -->
+
+    <div class="cleaner_with_height">&nbsp;</div>
+</div> <!-- end of content -->
+
+<div class="MenuTrang text-center">
+    <ul class="pagination">
+        @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        @if (Model.PageCount > 1)
+        {
+            // Previous Page
+            if (Model.HasPreviousPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">&laquo; Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link disabled">&laquo; Previous</span>
+                </li>
+            }
+
+            // Page Numbers
+            for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (i == Model.PageNumber)
+                {
+                    <li class="page-item active">
+                        <span class="page-link active">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                    </li>
+                }
+            }
+
+            // Next Page
+            if (Model.HasNextPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Next &raquo;</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link disabled">Next &raquo;</span>
+                </li>
+            }
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link disabled">No pages available</span>
+            </li>
+        }
+    </ul>
+</div>
+<style>
+    .MenuTrang {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination {
+        list-style-type: none;
+        padding: 0;
+        display: inline-block;
+    }
+
+        .pagination .page-item {
+            display: inline;
+        }
+
+        .pagination .page-link {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 0 5px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .pagination .page-link:hover {
+                background-color: #007bff;
+                color: white;
+            }
+
+        .pagination .active .page-link {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .pagination .disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            border-color: #dee2e6;
+        }
+</style>
