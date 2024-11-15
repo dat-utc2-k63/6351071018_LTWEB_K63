@@ -1,0 +1,87 @@
+﻿@model BookStore.Models.SACH
+
+@{
+    ViewBag.Title = "Xoasach";
+}
+
+<h2>Xác nhận thông tin sách cần xóa</h2>
+
+<h3>Bận quyết định xóa quyển sách này?</h3>
+<div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên sách:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tensach)
+            </dd>
+
+            <dt>
+                Giá bán:
+            </dt>
+
+            <dd>
+                @String.Format("{0:0,0}", Model.Giaban) VNĐ
+            </dd>
+
+            <dt>
+                Mô tả
+            </dt>
+
+            <dd style="width:300px; text-align:justify">
+                @Html.DisplayFor(model => model.Mota)
+            </dd>
+
+            <dt>
+                Ảnh bìa
+            </dt>
+
+            <dd>
+                <img src="@Url.Content("~/Content/Images/" + Model.Anhbia)" />
+            </dd>
+
+            <dt>
+                Ngày cập nhật:
+            </dt>
+
+            <dd>
+                @String.Format("{0:dd/MM/yyyy}", Model.Ngaycapnhat)
+            </dd>
+
+            <dt>
+                Số lượng tồn
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Soluongton)
+            </dd>
+
+            <dt>
+                Chủ đề:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CHUDE.TenChuDe)
+            </dd>
+
+            <dt>
+                Nhà xuất bản:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NHAXUATBAN.TenNXB)
+            </dd>
+
+        </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Trở về", "Sach")
+        </div>
+    }
+</div>

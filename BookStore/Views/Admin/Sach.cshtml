@@ -1,0 +1,191 @@
+﻿
+@using BookStore.Models
+@using PagedList.Mvc
+@model PagedList.PagedList <BookStore.Models.SACH >
+
+@helper Truncate(string input, int length) { 
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>...</text>
+    }
+    }
+@{
+    ViewBag.Title = "Sach";
+}
+
+<h2>Sach</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Themmoisach")
+</p>
+<table class="table" border="1">
+    <tr>
+        <th style="width:200px">
+            Tên sách
+        </th>
+        <th style="width:100px">
+            Giá bán
+        </th>
+        <th style="width:300px">
+            Mô tả
+        </th>
+        <th style="width:120px">
+            Ảnh bìa
+        </th>
+        <th style="width:150px">
+            Ngày cập nhật
+        </th>
+        <th style="width:120px">
+            Số lượng tồn
+        </th>
+        <th style="width:120px">
+            Tên chủ đề
+        </th>
+        <th style="width:100px">
+            Tên nhà xuất bản
+        </th>
+        <th style="width:200px">
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tensach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Giaban)
+            </td>
+            <td>
+                @Truncate(item.Mota, 50)
+            </td>
+            <td>
+                <img src="@Url.Content("~/Content/Images/" + item.Anhbia)" style="width:100px; height:150px"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ngaycapnhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soluongton)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHUDE.TenChuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHAXUATBAN.TenNXB)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Suasach", new { id = item.Masach }) |
+                @Html.ActionLink("Chi tiết", "Chitietsach", new { id = item.Masach }) |
+                @Html.ActionLink("Xóa", "Xoasach", new { id = item.Masach })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="MenuTrang text-center">
+    <ul class="pagination">
+        @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        @if (Model.PageCount > 1)
+        {
+            // Previous Page
+            if (Model.HasPreviousPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Sach", new { page = Model.PageNumber - 1 })">&laquo; Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link disabled">&laquo; Previous</span>
+                </li>
+            }
+
+            // Page Numbers
+            for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (i == Model.PageNumber)
+                {
+                    <li class="page-item active">
+                        <span class="page-link active">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Sach", new { page = i })">@i</a>
+                    </li>
+                }
+            }
+
+            if (Model.HasNextPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Sach", new { page = Model.PageNumber + 1 })">Next &raquo;</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link disabled">Next &raquo;</span>
+                </li>
+            }
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link disabled">No pages available</span>
+            </li>
+        }
+    </ul>
+</div>
+<style>
+    .MenuTrang {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination {
+        list-style-type: none;
+        padding: 0;
+        display: inline-block;
+    }
+
+        .pagination .page-item {
+            display: inline;
+        }
+
+        .pagination .page-link {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 0 5px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .pagination .page-link:hover {
+                background-color: #007bff;
+                color: white;
+            }
+
+        .pagination .active .page-link {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .pagination .disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            border-color: #dee2e6;
+        }
+</style>

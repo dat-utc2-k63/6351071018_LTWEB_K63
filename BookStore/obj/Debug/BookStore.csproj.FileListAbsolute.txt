@@ -74,3 +74,5 @@ D:\asp.net\BookStore\BookStore\bin\PagedList.dll
 D:\asp.net\BookStore\BookStore\bin\PagedList.Mvc.dll
 D:\asp.net\BookStore\BookStore\bin\PagedList.xml
 D:\asp.net\BookStore\BookStore\bin\PagedList.Mvc.xml
+D:\asp.net\BookStore\BookStore\bin\Newtonsoft.Json.dll
+D:\asp.net\BookStore\BookStore\bin\Newtonsoft.Json.xml

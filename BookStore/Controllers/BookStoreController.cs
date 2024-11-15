@@ -21,7 +21,7 @@ namespace BookStore.Controllers
         }
         public ActionResult Index(int ? page)
         {
-            int pageSize = 4;
+            int pageSize = 2;
             int pageNum = (page ?? 1);
             var sachmoi = Laysachmoi(5);
             return View(sachmoi.ToPagedList(pageNum, pageSize));

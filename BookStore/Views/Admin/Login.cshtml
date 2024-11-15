@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style>
+        /* Reset margin và padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px; /* Chiều rộng form */
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 50px; /* Tăng padding cho card */
+        }
+
+            .card h3 {
+                text-align: center;
+                color: #333;
+                font-size: 28px; /* Tăng kích thước font của tiêu đề */
+                margin-bottom: 30px;
+            }
+
+        .form-group {
+            margin-bottom: 20px; /* Tăng khoảng cách giữa các nhóm */
+        }
+
+            .form-group label {
+                font-size: 18px; /* Tăng kích thước font của nhãn */
+                color: #666;
+                display: block;
+                margin-bottom: 8px;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 12px; /* Tăng padding trong ô nhập */
+            font-size: 18px; /* Tăng kích thước font của ô nhập */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px; /* Tăng khoảng cách cho phần kiểm tra */
+            font-size: 16px;
+        }
+
+            .form-check input[type="checkbox"] {
+                margin-right: 8px;
+                transform: scale(1.2); /* Tăng kích thước của checkbox */
+            }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px; /* Tăng padding cho nút */
+            font-size: 18px; /* Tăng kích thước font của nút */
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .btn-submit:hover {
+                background-color: #0056b3;
+            }
+
+        .text-center {
+            text-align: center;
+            margin-top: 20px; /* Tăng khoảng cách trên và dưới liên kết */
+            font-size: 16px;
+        }
+
+            .text-center a {
+                color: #007bff;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                .text-center a:hover {
+                    color: #0056b3;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h3>Welcome back!</h3>
+            <h4 style="color: red; text-align: center">@ViewBag.Thongbao</h4>
+            <!-- Sign In Form -->
+            @using(Html.BeginForm())
+            { 
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" placeholder="username" required>
+                    @ViewData["Loi1"]
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                    @ViewData["Loi2"]
+                </div>
+
+                <button type="submit" class="btn-submit">Sign in</button>
+
+                }
+        </div>
+    </div>
+</body>
+</html>
+

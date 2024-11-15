@@ -1,0 +1,130 @@
+﻿@model BookStore.Models.SACH
+
+@{
+    ViewBag.Title = "Suasach";
+}
+
+<h2>Điều chỉnh thông tin sách</h2>
+
+@using (Html.BeginForm("Suasach", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 style="text-align:center">Thông Tin Sách</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Masach)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Masach, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div style="font:18px; padding:5px 0 0 5px">@Model.Masach</div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tensach, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.Tensach, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập tên sách" } })
+                @Html.ValidationMessageFor(model => model.Tensach, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Giaban, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.Giaban, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập giá bán" } })
+                @Html.ValidationMessageFor(model => model.Giaban, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mota, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea name="Mota">@Model.Mota</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Anhbia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                Chọn ảnh mới
+                <input type="file" name="fileUpload" />
+                <img src="@Url.Content("~/Content/Images/" + Model.Anhbia)" /> (Ảnh hiện tại)
+                @ViewBag.Thongbao
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ngaycapnhat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" name="Ngaycapnhat" />
+                @Html.ValidationMessageFor(model => model.Ngaycapnhat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Soluongton, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.Soluongton, new { htmlAttributes = new { @class = "form-control", placeholder = "Số lượng tồn" } })
+                @Html.ValidationMessageFor(model => model.Soluongton, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaCD,Model.NHAXUATBAN.TenNXB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownList("MaCD")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaNXB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownList("MaNXB")
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sửa" class="btn btn-primary" />
+                <a href="@Url.Action("sach", "Admin")" class="btn btn-secondary">Quay Lại</a>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .form-horizontal h4 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-horizontal .form-group {
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        margin-left: 380px;
+    }
+</style>

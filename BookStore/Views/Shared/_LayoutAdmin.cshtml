@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Book Store Template, Free CSS Template, CSS Website Layout, CSS, HTML" />
+    <meta name="description" content="Book Store Template, Free CSS Template, Download CSS Website" />
+    <link href="~/Content/templatemo_style.css" rel="stylesheet" type="text/css" />
+    <script src="~/scripts/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea'
+        });
+    </script>
+
+</head>
+<body>
+    <div id="templatemo_container">
+        <div id="templatemo_menu">
+            <ul>
+                <li><a href="@Url.Action("Index", "Admin")">Trang chủ</a></li>
+                <li><a href="@Url.Action("Login", "Admin")">Đăng nhập</a></li>
+                <li><a href="@Url.Action("Sach", "Admin")">Quản lý sách</a></li>
+                <li><a href="@Url.Action("Thongke", "Admin")">Thống kê sách</a></li>
+            </ul>
+        </div> <!-- end of menu -->
+
+        <div id="templatemo_header">
+            <div id="templatemo_special_offers">
+                <p>
+                    <span>25%</span> discounts for
+                    purchase over $80
+                </p>
+                <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
+            </div>
+
+
+            <div id="templatemo_new_books">
+                <ul>
+                    <li>Suspen disse</li>
+                    <li>Maece nas metus</li>
+                    <li>In sed risus ac feli</li>
+                </ul>
+                <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
+            </div>
+        </div> <!-- end of header -->
+        @RenderBody()
+        <div id="templatemo_footer">
+
+            <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br />
+            Copyright © 2048 <a href="#"><strong>Your Company Name</strong></a> | <a href="http://www.iwebsitetemplate.com" target="_parent">Website Templates</a> by <a href="http://www.templatemo.com" target="_parent" title="free css templates">Free CSS Templates</a>
+        </div>
+        <!-- end of footer -->
+    </div>
+</body>
+</html>

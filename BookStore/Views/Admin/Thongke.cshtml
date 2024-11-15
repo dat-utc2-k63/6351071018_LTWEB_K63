@@ -1,0 +1,35 @@
+﻿@using Newtonsoft.Json;
+@model IEnumerable<BookStore.Models.SACH>
+
+<h2>Thống kê số lượng sách theo từng chủ đề</h2>
+
+<canvas id="myChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var chartData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.ChartData));
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: chartData.map(data => data.TenChuDe),
+                datasets: [{
+                    label: 'Số lượng sách',
+                    data: chartData.map(data => data.SoLuong),
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)', 
+                    borderColor: 'rgba(0, 102, 204, 1)',       
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
